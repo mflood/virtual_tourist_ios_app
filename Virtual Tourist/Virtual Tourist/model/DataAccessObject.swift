@@ -11,12 +11,12 @@ import CoreData
 
 class DataAccessObject {
     
-    class func addNewPin(latitude: Double, longitude: Double) -> Bool {
+    class func addNewPin(latitude: Double, longitude: Double) -> Pin? {
         
         let existingPins = findPin(latitude: latitude, longitude: longitude)
         guard existingPins.count == 0 else {
             print("Pin already exists")
-            return false
+            return nil
             
         }
 
@@ -31,7 +31,7 @@ class DataAccessObject {
         
         do {
             try context.save()
-            return true
+            return pin
         } catch {
             fatalError("Could not save context: \(error)")
         }
