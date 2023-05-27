@@ -47,6 +47,8 @@ class MapViewController: UIViewController {
         mapView.addGestureRecognizer(longPressGesture)
         
         addPinsToMap()
+        restoreMapView()
+        
     }
 
     @objc func addPhotoPin(_ gestureRecognizer: UILongPressGestureRecognizer) {
@@ -67,6 +69,35 @@ class MapViewController: UIViewController {
         }
     }
 
+    
+    func saveMapView() {
+        let region = mapView.region
+        let latitude = region.center.latitude
+        let longitude = region.center.longitude
+        let latitudeDelta = region.span.latitudeDelta
+        let longitudeDelta = region.span.longitudeDelta
+
+        UserDefaults.standard.set(latitude, forKey: "latitude")
+        UserDefaults.standard.set(longitude, forKey: "longitude")
+        UserDefaults.standard.set(latitudeDelta, forKey: "latitudeDelta")
+        UserDefaults.standard.set(longitudeDelta, forKey: "longitudeDelta")
+    }
+    
+    func restoreMapView() {
+
+        if let latitude = UserDefaults.standard.value(forKey: "latitude") as? CLLocationDegrees,
+           let longitude = UserDefaults.standard.value(forKey: "longitude") as? CLLocationDegrees,
+           let latitudeDelta = UserDefaults.standard.value(forKey: "latitudeDelta") as? CLLocationDegrees,
+           let longitudeDelta = UserDefaults.standard.value(forKey: "longitudeDelta") as? CLLocationDegrees {
+
+            let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let span = MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+            let region = MKCoordinateRegion(center: center, span: span)
+
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
     func addPinsToMap() {
         
         let allPins = DataAccessObject.selectAllPins()
@@ -132,7 +163,10 @@ extension MapViewController: UIGestureRecognizerDelegate {
 
 
 extension MapViewController: MKMapViewDelegate {
-    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("Map view region did change")
+        saveMapView()
+    }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
            let identifier = "marker"
