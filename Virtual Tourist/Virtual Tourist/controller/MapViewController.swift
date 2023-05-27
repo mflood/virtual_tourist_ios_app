@@ -193,6 +193,17 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? FlickrPin {
             print("Showing Pin \(annotation.pinUuid)")
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let destinationViewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoAlbumViewController {
+                // If you have a uuid property on your destination view controller, you can set it here:
+                destinationViewController.flickrPinUuid = annotation.pinUuid
+
+                // Then you push the destination view controller:
+                navigationController?.pushViewController(destinationViewController, animated: true)
+            }
+
+            
         }
     }
 

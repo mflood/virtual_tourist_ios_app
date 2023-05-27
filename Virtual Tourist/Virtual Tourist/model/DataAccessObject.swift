@@ -57,6 +57,26 @@ class DataAccessObject {
         return []
     }
     
+    class func findPin(uuid: String) -> [Pin] {
+        
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Pin>(entityName: "Pin")
+        let uuidToFind: String = uuid
+
+        // Set a predicate to find the pin with the matching coordinates
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", argumentArray: [uuidToFind])
+
+        do {
+            let matchingPins = try context.fetch(fetchRequest)
+            return matchingPins
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return []
+    }
+    
+    
     class func selectAllPins() -> [Pin] {
         
         let context = persistentContainer.viewContext
