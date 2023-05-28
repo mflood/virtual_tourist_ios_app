@@ -10,7 +10,7 @@ import UIKit
 
 class FlickrApiClient {
     
-    static var FlickrApiKey: String! = nil
+    static var FlickrApiKey: String = API_KEY
     static var searchRadiusKm: Int32 = 5
     
     
@@ -31,7 +31,7 @@ class FlickrApiClient {
                 let baseUrl = "https://api.flickr.com/services/rest/"
                 let queryItems = [
                     URLQueryItem(name: "method", value: "flickr.photos.search"),
-                    URLQueryItem(name: "api_key", value: FlickrApiClient.FlickrApiKey!),
+                    URLQueryItem(name: "api_key", value: FlickrApiClient.FlickrApiKey),
                     // URLQueryItem(name: "text", value: text),
                     URLQueryItem(name: "radius", value: "20"),
                     URLQueryItem(name: "radius_units", value: "km"),

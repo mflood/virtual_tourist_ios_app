@@ -90,6 +90,68 @@ class DataAccessObject {
         
     }
     
+    class func updatePinData(pin: Pin, result: PhotoSearchResult, callback: @escaping () -> Void) {
+        
+        let context = persistentContainer.viewContext
+        
+        pin.flickr_download_page_number = result.photos.page
+        pin.flickr_per_page = result.photos.perPage
+        pin.flickr_num_pages = result.photos.pages
+        pin.flickr_total_photos = result.photos.total
+        
+        do {
+            try context.save()
+        } catch {
+            fatalError("Could not save context: \(error)")
+        }
+        
+        deletePhotosForPin(pin: pin)
+        
+        for photo in result.photos.photo {
+            addPhoto(pin: pin, searchResultPhoto: photo)
+        }
+        
+        callback()
+    }
+    
+    
+    class func addPhoto(pin: Pin, searchResultPhoto: SearchResultPhoto) {
+        
+        let context = persistentContainer.viewContext
+        
+        let photo = Photo(context: context)
+        
+        photo.flickr_id = searchResultPhoto.id
+        photo.flickr_farm = searchResultPhoto.farm
+        photo.flickr_owner = searchResultPhoto.owner
+        photo.flickr_title = searchResultPhoto.title
+        photo.flickr_secret = searchResultPhoto.secret
+        photo.flickr_server = searchResultPhoto.server
+        photo.timestamp = Date()
+        
+        pin.addToPhotos(photo)
+
+        do {
+            try context.save()
+        } catch {
+            fatalError("Could not save context: \(error)")
+        }
+    }
+    
+    
+    
+    class func deletePhotosForPin(pin: Pin) {
+        let context = persistentContainer.viewContext
+       
+       // if let photos = pin.photos? as? [Photo] {
+       //     // Iterate over each photo and delete it
+       //     for photo in photos {
+       //         context.delete(photo)
+       //     }
+       //  }
+    }
+    
+    
     class func deleteAllPins() {
 
         let context = persistentContainer.viewContext
@@ -98,6 +160,7 @@ class DataAccessObject {
 
         do {
             try context.execute(batchDeleteRequest)
+            try context.save()
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")
         }
