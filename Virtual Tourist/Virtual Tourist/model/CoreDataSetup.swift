@@ -11,6 +11,9 @@ import CoreData
 // Define the Core Data stack
 var persistentContainer: NSPersistentContainer = {
     
+    
+   
+    
     let container = NSPersistentContainer(name: "Virtual_Tourist")
     
     // Load the persistent store
