@@ -245,6 +245,7 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
         
         if !albumImage.isPlaceHolder {
             let imageViewController = ImageViewController(image: albumImage.image)
+            
             self.navigationController?.pushViewController(imageViewController, animated: true)
         }
     }

@@ -44,13 +44,13 @@ class FlickrApiClient {
                     URLQueryItem(name: "lat", value: "\(lat)"),
                     URLQueryItem(name: "lon", value: "\(lon)"),
 
-                    URLQueryItem(name: "radius", value: "0.1"),
+                    URLQueryItem(name: "radius", value: "0.2"),
                     URLQueryItem(name: "radius_units", value: "km"),
                     URLQueryItem(name: "page", value: "\(page)"),
                     URLQueryItem(name: "media", value: "photos"), // default photos and videos
                     URLQueryItem(name: "format", value: "json"),
                     URLQueryItem(name: "nojsoncallback", value: "1"),
-                    URLQueryItem(name: "per_page", value: "50") // default 100
+                    URLQueryItem(name: "per_page", value: "75") // default 100
                     
                 ]
                 var components = URLComponents(string: baseUrl)!

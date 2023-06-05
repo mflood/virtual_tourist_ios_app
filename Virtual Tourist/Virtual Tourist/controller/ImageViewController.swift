@@ -30,6 +30,22 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
                imageView.frame = self.view.bounds
                imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                self.view.addSubview(imageView)
+        
+        
+        
+        // Create a UITapGestureRecognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        
+        // Add it to the view
+        self.view.addGestureRecognizer(tapGesture)
+
+        
     }
  
+    @objc func didTapView() {
+        print("View was tapped!!!")
+        dismiss(animated: true)
+        
+        // dismiss(animated: true, completion: nil)
+    }
 }
