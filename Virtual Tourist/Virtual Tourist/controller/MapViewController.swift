@@ -64,7 +64,7 @@ class MapViewController: UIViewController {
         let touchPoint = gestureRecognizer.location(in: mapView)
         let pinCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
-        print(pinCoordinates.longitude)
+        print("new pin coordinates: \(pinCoordinates.longitude)")
         
         if let newPin = DataAccessObject.addNewPin(latitude: pinCoordinates.latitude,
                                                    longitude: pinCoordinates.longitude) {
@@ -199,24 +199,20 @@ extension MapViewController: MKMapViewDelegate {
         if let annotation = view.annotation as? FlickrPin {
             print("Showing Pin \(annotation.pinUuid)")
             
-            let matchingPins = DataAccessObject.findPin(uuid: annotation.pinUuid)
+            let context = persistentContainer.viewContext
             
-            guard matchingPins.count > 0 else {
+            guard let pin = DataAccessObject.findPin(uuid: annotation.pinUuid, context: context) else {
                 return
             }
-            
-            let pin = matchingPins[0]
                         
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let destinationViewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoAlbumViewController {
                 // If you have a uuid property on your destination view controller, you can set it here:
-                destinationViewController.flickrPin = pin
+                destinationViewController.pinUuid = pin.uuid
 
                 // Then you push the destination view controller:
                 navigationController?.pushViewController(destinationViewController, animated: true)
             }
-
-            
         }
     }
 

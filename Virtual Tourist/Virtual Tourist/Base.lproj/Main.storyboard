@@ -25,6 +25,16 @@
                                 </constraints>
                                 <standardMapConfiguration key="preferredConfiguration" elevationStyle="realistic"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7g-md-mrA">
+                                <rect key="frame" x="118" y="405" width="156.33333333333326" height="40.666666666666742"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Wco-yn-Ik1">
+                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ySR-RO-I2J">
                                 <rect key="frame" x="16" y="217" width="361" height="509"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,6 +72,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ySR-RO-I2J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7qn-FF-yJw"/>
+                            <constraint firstItem="Wco-yn-Ik1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Flw-et-AeY"/>
+                            <constraint firstItem="Wco-yn-Ik1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jbb-Mk-0RZ"/>
                             <constraint firstItem="egp-CY-9OP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="59" id="MZB-Lt-BeH"/>
                             <constraint firstItem="Xmc-jt-cTr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uh8-nX-6qq"/>
                             <constraint firstItem="Xmc-jt-cTr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="no1-IF-del"/>
@@ -75,8 +87,10 @@
                     <navigationItem key="navigationItem" id="1VS-e3-YTu"/>
                     <connections>
                         <outlet property="SmallMapView" destination="8bC-Xf-vdC" id="2c1-D0-f63"/>
+                        <outlet property="activityIndicator" destination="Wco-yn-Ik1" id="Htd-Dt-2qJ"/>
                         <outlet property="collectionView" destination="ySR-RO-I2J" id="Req-a6-qrB"/>
                         <outlet property="newCollectionButton" destination="Xmc-jt-cTr" id="DUM-uK-sqe"/>
+                        <outlet property="noImagesLabel" destination="F7g-md-mrA" id="Hs5-61-aH2"/>
                         <outlet property="smallMapView" destination="egp-CY-9OP" id="O3j-Hx-rgr"/>
                     </connections>
                 </viewController>

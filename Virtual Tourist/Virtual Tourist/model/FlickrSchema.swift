@@ -8,6 +8,12 @@
 import Foundation
 import UIKit
 
+struct FlickrErrorMessage: Codable {
+    var status: String
+    var code: Int32
+    var message: String
+}
+
 struct SearchResultPhoto: Codable {
     var id: String
     var owner: String
