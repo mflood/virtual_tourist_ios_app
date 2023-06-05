@@ -80,6 +80,26 @@ class DataAccessObject {
         }
     }
     
+    class func deletePhotoById(id: String) {
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Photo>(entityName: "Photo")
+        let idToFind: String = id
+
+        // Set a predicate to find the pin with the matching coordinates
+        fetchRequest.predicate = NSPredicate(format: "flickr_id == %@", argumentArray: [idToFind])
+
+        do {
+            let matchingPhotos = try context.fetch(fetchRequest)
+            for photo in matchingPhotos {
+                context.delete(photo)
+            }
+            try context.save()
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+        }
+    }
+    
     class func findPhotoById(id: String) -> Photo? {
         
         let context = persistentContainer.viewContext

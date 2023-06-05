@@ -9,6 +9,7 @@ import UIKit
 import MapKit
 
 struct AlbumImage {
+    let photoId: String
     let image: UIImage
     let isPlaceHolder: Bool
 }
@@ -45,6 +46,9 @@ class PhotoAlbumViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        
+        collectionView.addGestureRecognizer(longPressGesture)
         
         if let pin = flickrPin {
             // Create a map bar at the top featuring the pin
@@ -117,7 +121,6 @@ class PhotoAlbumViewController: UIViewController {
         } else {
             self.noImagesLabel.text = errorString ?? "Error loading images"
             self.noImagesLabel.isHidden = false
-            print(errorString)
         }
     }
     
@@ -140,10 +143,10 @@ class PhotoAlbumViewController: UIViewController {
                 if let photo = photoObject as? Photo {
                     if let imageData = photo.imageData {
                         let image = UIImage(data: imageData)!
-                        let albumImage = AlbumImage(image: image, isPlaceHolder: false)
+                        let albumImage = AlbumImage(photoId: photo.flickr_id!, image: image, isPlaceHolder: false)
                         self.images.append(albumImage)
                     } else {
-                        let albumImage = AlbumImage(image: placeHolderImage, isPlaceHolder: true)
+                        let albumImage = AlbumImage(photoId: photo.flickr_id!, image: placeHolderImage, isPlaceHolder: true)
                         self.images.append(albumImage)
                     }
                 }
@@ -219,6 +222,24 @@ class PhotoAlbumViewController: UIViewController {
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         smallMapView.addAnnotation(annotation)
     }
+    
+    @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
+        if gesture.state != .ended {
+            return
+        }
+        
+        let point = gesture.location(in: self.collectionView)
+        if let indexPath = self.collectionView.indexPathForItem(at: point) {
+            // Remove the item from your data source
+            
+            let albumImage = self.images.remove(at: indexPath.row)
+            DataAccessObject.deletePhotoById(id: albumImage.photoId)
+            
+            // Delete the item from the collection view
+            collectionView.deleteItems(at: [indexPath])
+        }
+    }
+    
 }
 
 
