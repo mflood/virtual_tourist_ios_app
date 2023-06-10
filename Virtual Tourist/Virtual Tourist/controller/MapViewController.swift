@@ -62,9 +62,7 @@ class MapViewController: UIViewController {
         
         let touchPoint = gestureRecognizer.location(in: mapView)
         let pinCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        
-        print("new pin coordinates: \(pinCoordinates.longitude)")
-        
+         
         if let newPin = dataController.addNewPin(latitude: pinCoordinates.latitude,
                                                    longitude: pinCoordinates.longitude) {
             let annotation = makeAnnotation(pin: newPin)
@@ -115,19 +113,15 @@ class MapViewController: UIViewController {
     }
     
     func makeAnnotation(pin: Pin) -> FlickrPin {
-        print("\(pin.latitude) \(pin.longitude)")
-        // Notice that the float values are being used to create CLLocationDegree values.
-        // This is a version of the Double type.
+
         let lat = CLLocationDegrees(pin.latitude)
         let long = CLLocationDegrees(pin.longitude)
         
-        // The lat and long are used to create a CLLocationCoordinates2D instance.
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         let pinTitle = pin.title!
         let pinSubtitle = ("\(pin.timestamp!)")
         let pinUuid = pin.uuid!
         
-        // Here we create the annotation and set its coordiate, title, and subtitle properties
         let annotation = FlickrPin(coordinate: coordinate, title: pinTitle, subtitle: pinSubtitle, uuid: pinUuid)
         return annotation
     }
@@ -136,22 +130,11 @@ class MapViewController: UIViewController {
     func makeAnnotations(pins: [Pin]) -> [FlickrPin] {
         
         var annotations = [FlickrPin]()
-        
-        // The "locations" array is loaded with the sample data below. We are using the dictionaries
-        // to create map annotations. This would be more stylish if the dictionaries were being
-        // used to create custom structs. Perhaps StudentLocation structs.
+
         
         for pin in pins {
             
-            // Here we create the annotation and set its coordiate, title, and subtitle properties
             let annotation = makeAnnotation(pin: pin)
-                       
-            //if studentLocation.mediaUrl != "" {
-            //    let pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "yellow")
-            //    pinView.markerTintColor = .yellow
-            //}
-            
-            // Finally we place the annotation in an array of annotations.
             annotations.append(annotation)
         }
         return annotations
@@ -167,7 +150,6 @@ extension MapViewController: UIGestureRecognizerDelegate {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("Map view region did change")
         saveMapView()
     }
     
@@ -196,7 +178,6 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? FlickrPin {
-            print("Showing Pin \(annotation.pinUuid)")
          
             guard let pin = dataController.findPin(uuid: annotation.pinUuid) else {
                 return

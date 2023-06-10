@@ -64,7 +64,6 @@ class FlickrApiClient {
     {
         
         let request = URLRequest(url: FlickrApiClient.Endpoint.photo(photoRequest).url)
-        print(request)
         
         let session = URLSession.shared
         
@@ -95,7 +94,6 @@ class FlickrApiClient {
     class func searchPhotos(lat: Double, lon: Double, page: Int32, callback: @escaping (_ photoSearchResult: PhotoSearchResult?, _ errorString: String?) -> Void) {
         
         let request = URLRequest(url: FlickrApiClient.Endpoint.search(lat, lon, page).url)
-        print(request)
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { data, response, error in
