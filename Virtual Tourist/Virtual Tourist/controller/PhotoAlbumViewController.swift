@@ -16,6 +16,7 @@ struct AlbumImage {
 
 class PhotoAlbumViewController: UIViewController {
 
+    weak var dataController: DataController!
     var images: [AlbumImage] = []
     
     let placeHolderImage =  UIImage(named: "AppIcon")!
@@ -32,8 +33,7 @@ class PhotoAlbumViewController: UIViewController {
     private var isDownloading: Bool = false
 
     var flickrPin: Pin? {
-        let context = persistentContainer.viewContext
-        return DataAccessObject.findPin(uuid: pinUuid, context: context)
+        return dataController.findPin(uuid: pinUuid)
     }
     
     override func viewDidLoad() {
@@ -84,7 +84,7 @@ class PhotoAlbumViewController: UIViewController {
         self.images = []
         self.collectionView.reloadData()
         
-        DataAccessObject.deletePhotos(forPinUuid: pinUuid)
+        dataController.deletePhotos(forPinUuid: pinUuid)
         
         
         self.isDownloading = true
@@ -115,7 +115,7 @@ class PhotoAlbumViewController: UIViewController {
         self.isDownloading = false
         
         if let result = photoSearchResult {
-            DataAccessObject.updatePinData(pinUuid: pinUuid,
+            dataController.updatePinData(pinUuid: pinUuid,
                                            result: result,
                                            callback: handlePinUpdated)
         } else {
@@ -206,7 +206,7 @@ class PhotoAlbumViewController: UIViewController {
             return
         }
         
-        DataAccessObject.setPhotoImageData(id: flickrPhotoRequrest.id, imageData: imageData)
+        dataController.setPhotoImageData(id: flickrPhotoRequrest.id, imageData: imageData)
         loadAvailablePhotos()
     }
     
@@ -233,7 +233,7 @@ class PhotoAlbumViewController: UIViewController {
             // Remove the item from your data source
             
             let albumImage = self.images.remove(at: indexPath.row)
-            DataAccessObject.deletePhotoById(id: albumImage.photoId)
+            dataController.deletePhotoById(id: albumImage.photoId)
             
             // Delete the item from the collection view
             collectionView.deleteItems(at: [indexPath])

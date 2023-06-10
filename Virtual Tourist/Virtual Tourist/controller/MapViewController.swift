@@ -14,6 +14,7 @@ import CoreData
 
 class FlickrPin: NSObject, MKAnnotation {
     
+
     dynamic var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
@@ -29,12 +30,10 @@ class FlickrPin: NSObject, MKAnnotation {
 
 class MapViewController: UIViewController {
     
+    weak var dataController: DataController!
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
-        
-        //DataAccessObject.deleteAllPins()
-        
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -66,7 +65,7 @@ class MapViewController: UIViewController {
         
         print("new pin coordinates: \(pinCoordinates.longitude)")
         
-        if let newPin = DataAccessObject.addNewPin(latitude: pinCoordinates.latitude,
+        if let newPin = dataController.addNewPin(latitude: pinCoordinates.latitude,
                                                    longitude: pinCoordinates.longitude) {
             let annotation = makeAnnotation(pin: newPin)
             mapView.addAnnotations([annotation])
@@ -104,7 +103,7 @@ class MapViewController: UIViewController {
     
     func addPinsToMap() {
         
-        let allPins = DataAccessObject.selectAllPins()
+        let allPins = dataController.selectAllPins()
         
         let newAnnotations = makeAnnotations(pins: allPins)
         
@@ -198,16 +197,15 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? FlickrPin {
             print("Showing Pin \(annotation.pinUuid)")
-            
-            let context = persistentContainer.viewContext
-            
-            guard let pin = DataAccessObject.findPin(uuid: annotation.pinUuid, context: context) else {
+         
+            guard let pin = dataController.findPin(uuid: annotation.pinUuid) else {
                 return
             }
                         
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let destinationViewController = storyboard.instantiateViewController(withIdentifier: "PhotoViewController") as? PhotoAlbumViewController {
                 // If you have a uuid property on your destination view controller, you can set it here:
+                destinationViewController.dataController = dataController
                 destinationViewController.pinUuid = pin.uuid
 
                 // Then you push the destination view controller:
