@@ -102,7 +102,12 @@ class FlickrApiClient {
             
             if error != nil { // Handle error…
                 DispatchQueue.main.async {
-                    callback(nil, error?.localizedDescription)
+                    if let errorMessage = error?.localizedDescription {
+                        callback(nil, errorMessage)
+                    } else {
+                        callback(nil, "unknown error searching")
+                    }
+                    
                 }
                 return
             }
@@ -125,16 +130,8 @@ class FlickrApiClient {
                     callback(response, nil)
                 }
             } catch {
-                do {
-                    var response: FlickrErrorMessage
-                    response = try decoder.decode(FlickrErrorMessage.self, from: data)
-                    DispatchQueue.main.async {
-                        callback(nil, response.message)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        callback(nil, "\(error)")
-                    }
+                DispatchQueue.main.async {
+                    callback(nil, "error searching photos")
                 }
             }
         }

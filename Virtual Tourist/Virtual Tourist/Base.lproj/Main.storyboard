@@ -25,9 +25,8 @@
                                 </constraints>
                                 <standardMapConfiguration key="preferredConfiguration" elevationStyle="realistic"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7g-md-mrA">
-                                <rect key="frame" x="118" y="405" width="156.33333333333326" height="40.666666666666742"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F7g-md-mrA">
+                                <rect key="frame" x="118.33333333333333" y="405.66666666666669" width="156.33333333333337" height="40.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,10 +71,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ySR-RO-I2J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7qn-FF-yJw"/>
+                            <constraint firstItem="Wco-yn-Ik1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FEa-aY-x8S"/>
                             <constraint firstItem="Wco-yn-Ik1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Flw-et-AeY"/>
                             <constraint firstItem="Wco-yn-Ik1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jbb-Mk-0RZ"/>
+                            <constraint firstItem="Wco-yn-Ik1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KcM-fE-8eY"/>
                             <constraint firstItem="egp-CY-9OP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="59" id="MZB-Lt-BeH"/>
                             <constraint firstItem="Xmc-jt-cTr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uh8-nX-6qq"/>
+                            <constraint firstItem="F7g-md-mrA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="X0v-r3-Ss6"/>
+                            <constraint firstItem="F7g-md-mrA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mOf-e6-ISE"/>
                             <constraint firstItem="Xmc-jt-cTr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="no1-IF-del"/>
                             <constraint firstItem="Xmc-jt-cTr" firstAttribute="top" secondItem="ySR-RO-I2J" secondAttribute="bottom" constant="8" symbolic="YES" id="qUc-Ez-FVz"/>
                             <constraint firstItem="ySR-RO-I2J" firstAttribute="top" secondItem="egp-CY-9OP" secondAttribute="bottom" constant="8" symbolic="YES" id="qyg-JL-dIc"/>
@@ -116,7 +119,7 @@
             </objects>
             <point key="canvasLocation" x="-1366" y="-1044"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="RRE-3A-UbF">
             <objects>
                 <viewController id="xmb-Be-hWS" customClass="SettingsViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
@@ -124,9 +127,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em4-t0-anE">
-                                <rect key="frame" x="124" y="340" width="145" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em4-t0-anE">
+                                <rect key="frame" x="124" y="408.66666666666669" width="145" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Remove All PIns"/>
                                 <connections>
@@ -136,18 +138,22 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fo4-GJ-ez9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="em4-t0-anE" firstAttribute="centerY" secondItem="gdR-Cd-12G" secondAttribute="centerY" id="Iwy-PK-Ubp"/>
+                            <constraint firstItem="em4-t0-anE" firstAttribute="centerX" secondItem="gdR-Cd-12G" secondAttribute="centerX" id="MTQ-2b-M2g"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="gKr-kj-02J"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="gKr-kj-02J"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIA-gI-wZq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-338.16793893129767" y="-475.35211267605638"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="0tM-uu-e98">
             <objects>
                 <navigationController id="w08-0g-ty1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JL3-n1-KEh"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="JL3-n1-KEh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SCg-2f-KeG">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -186,7 +192,7 @@
                     <navigationItem key="navigationItem" id="vjO-CP-pQx"/>
                     <connections>
                         <outlet property="mapView" destination="vZU-ub-uq8" id="Mf4-bf-DcC"/>
-                        <segue destination="BYZ-38-t0r" kind="show" id="HsJ-2N-Hz7"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="ohotoSegue" id="HsJ-2N-Hz7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhv-8e-Yia" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
