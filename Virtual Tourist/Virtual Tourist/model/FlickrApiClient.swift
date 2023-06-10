@@ -129,7 +129,11 @@ class FlickrApiClient {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    callback(nil, "error searching photos")
+                    if API_KEY == "" {
+                        callback(nil, "Missing API Key")
+                    } else {
+                        callback(nil, "error searching photos")
+                    }
                 }
             }
         }

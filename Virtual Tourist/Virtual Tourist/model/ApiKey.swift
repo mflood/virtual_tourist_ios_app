@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+
+// Put Flickr API Key here...
+let API_KEY = ""
