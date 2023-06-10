@@ -9,4 +9,4 @@ import Foundation
 
 
 // Put Flickr API Key here...
-let API_KEY = ""
+let API_KEY = "792aa4dd84529c0e15dc660da2250bc1"
