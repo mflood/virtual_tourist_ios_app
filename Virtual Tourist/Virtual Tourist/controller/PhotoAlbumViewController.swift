@@ -73,7 +73,7 @@ class PhotoAlbumViewController: UIViewController {
     func queryForImages() {
         
         guard self.isDownloading == false else {
-            debugPrint("Download in progress....")
+            debugPrint  ("Download in progress....")
             return
         }
         
