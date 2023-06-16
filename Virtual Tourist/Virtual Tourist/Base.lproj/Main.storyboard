@@ -132,7 +132,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Remove All PIns"/>
                                 <connections>
-                                    <action selector="handleremoveallPinsClicked" destination="xmb-Be-hWS" eventType="touchUpInside" id="NRH-jV-ist"/>
+                                    <action selector="handleremoveallPinsClicked" destination="xmb-Be-hWS" eventType="touchUpInside" id="ElB-Oy-OdB"/>
                                 </connections>
                             </button>
                         </subviews>

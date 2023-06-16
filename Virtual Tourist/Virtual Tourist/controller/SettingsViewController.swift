@@ -11,15 +11,9 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     weak var dataController: DataController!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     @IBAction func handleremoveallPinsClicked() {
-        
         dataController.deleteAllPins()
-        
     }
     
 }
