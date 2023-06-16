@@ -50,7 +50,7 @@ class FlickrApiClient {
                     URLQueryItem(name: "media", value: "photos"), // default photos and videos
                     URLQueryItem(name: "format", value: "json"),
                     URLQueryItem(name: "nojsoncallback", value: "1"),
-                    URLQueryItem(name: "per_page", value: "75") // default 100
+                    URLQueryItem(name: "per_page", value: "25") // default 100
                     
                 ]
                 var components = URLComponents(string: baseUrl)!
