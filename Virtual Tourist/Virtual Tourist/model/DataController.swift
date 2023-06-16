@@ -33,7 +33,7 @@ class DataController {
         let existingPins = findPin(latitude: latitude, longitude: longitude)
         
         guard existingPins.count == 0 else {
-            print("Pin already exists")
+            debugPrint("Pin already exists")
             return nil
         }
         
@@ -66,7 +66,7 @@ class DataController {
             let matchingPins = try viewContext.fetch(fetchRequest)
             return matchingPins
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            debugPrint("Could not fetch. \(error), \(error.userInfo)")
         }
         return []
     }
@@ -108,7 +108,7 @@ class DataController {
             }
             try viewContext.save()
         } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
+            debugPrint("Could not delete. \(error), \(error.userInfo)")
         }
     }
     
@@ -146,7 +146,7 @@ class DataController {
                 return matchingPins[0]
             }
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            debugPrint("Could not fetch. \(error), \(error.userInfo)")
         }
         return nil
     }
@@ -191,7 +191,7 @@ class DataController {
     
     func addPhoto(pin: Pin, searchResultPhoto: SearchResultPhoto) {
         
-        print("adding photo: \(searchResultPhoto)")
+        debugPrint("adding photo: \(searchResultPhoto)")
         let photo = Photo(context: viewContext)
         
         photo.flickr_id = searchResultPhoto.id
@@ -219,7 +219,7 @@ class DataController {
                     // pin.removeFromPhotos(photo)
                     viewContext.delete(photo)
                 } else {
-                    print("Photo was not there??")
+                    debugPrint("Photo was not there??")
                 }
             }
         }
@@ -243,7 +243,7 @@ class DataController {
             try viewContext.execute(batchDeleteRequest)
             try viewContext.save()
         } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
+            debugPrint("Could not delete. \(error), \(error.userInfo)")
         }
     }
     
